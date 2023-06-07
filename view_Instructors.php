@@ -1,10 +1,5 @@
 <?php
     session_start();
-    // if (!isset($_SESSION['instructorId'])) {
-    //     // User not logged in, redirect to login page
-    //     header("Location: ../Login/Home.html");
-    //     exit();
-    // }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,10 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!----======== CSS ======== -->
     <link rel="stylesheet" href="style.css">
-    
-    <!----===== Boxicons CSS ===== -->
     
     <title>Instructors List</title> 
 </head>
@@ -29,8 +21,8 @@
                 </span>
 
                 <div class="text logo-text">
-                    <span class="name">Admin </span>
-                    <span class="profession">Super Admin</span>
+                    <span class="name">Administrator </span>
+                    <span class="profession">Admin Panel</span>
                 </div>
             </div>
 
@@ -43,28 +35,28 @@
 
                 <ul class="menu-links">
                     <li  class="nav-link">
-                        <a  href="index.php">
+                        <a  href="view_students.php">
                             <i  class='bx bx-menu icon' ><img style="width: 50%;" src="icons/profile.png"></i>
                             <span  class="text nav-text">Student List</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a style="background-color: #00bbff;" href="Instructors.php">
+                        <a style="background-color: #00bbff;" href="view_Instructors.php">
                             <i class='bx bx-bell icon'><img style="width: 50%;" src="icons/instructor.png"></i>
                             <span class="text nav-text">Instructor List</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="AddStu.php">
+                        <a href="Add_student.php">
                             <i class='bx bx-pie-chart-alt icon'><img style="width: 50%;" src="icons/addstudent.png"></i>
                             <span class="text nav-text">Add Students</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="AddIns.php">
+                        <a href="Add_Instructor.php">
                             <i class='bx bx-heart icon' ><img style="width: 50%;" src="icons/addinstructor.png"></i>
                             <span class="text nav-text">Add Instructor</span>
                         </a>
@@ -75,7 +67,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="../Login/logout.php">
+                    <a href="logout.php">
                         <i class='bx bx-log-out icon' ><img style="width: 50%;" src="icons/logout.png"></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -93,10 +85,11 @@
               <th>ID</th>
               <th>Username</th>
               <th>Password</th>
-              <th>Action</th>
+              <th>Subject</th>
+              <th colspan="2">Action</th>
             </tr>
             <?php
-                include "../backend/connection.php";
+                include "connection.php";
                 $sql = "select * from instructor_details";
                 $result = $con->query($sql);
 
@@ -110,11 +103,15 @@
                     <tr>
                         <td>$row[InsId]</td>
                         <td>$row[instructorId]</td>
-
                         <td>$modifiedPass</td>
+                        <td>$row[subject]</td>
                         <td>
-                            <a href='CRUD/deleteIns.php?id=$row[InsId]'><button>Delete</button></a>
+                            <a href='update_Instructor.php?InsId=$row[InsId]'><button>Update</button></a>
                         </td>
+                        <td>
+                            <a href='delete_Instructor.php?InsId=$row[InsId]'><button>Delete</button></a>
+                        </td>
+                        
                     </tr>";
                 }
             ?>

@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "../backend/connection.php";
+    include "connection.php";
 
     $adminId = $_POST['adminId'];
     $password = $_POST['password'];
@@ -14,8 +14,7 @@
         $row = mysqli_fetch_assoc($result);
         if($row['adminId'] === $adminId && $row['password'] === $password){
             $_SESSION['adminId'] = $row['adminId'];
-            // $_SESSION['password'] = $row['password'];
-            header("location: view_student.php");
+            header("location: view_students.php");
             exit();
         }
     }else {

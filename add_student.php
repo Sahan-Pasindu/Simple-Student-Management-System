@@ -2,7 +2,7 @@
     session_start();
 ?>
 <?php
-    include "../backend/connection.php";
+    include "connection.php";
     $studentId="";
     $password="";
 
@@ -30,7 +30,7 @@
             $password="";
 
             $suss="added correctly";
-            header("location: index.php");
+            header("location: view_students.php");
 
         }while(false);
     }
@@ -41,11 +41,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!----======== CSS ======== -->
+
     <link rel="stylesheet" href="style.css">
-    
-    <!----===== Boxicons CSS ===== -->
     
     <title>Add Students</title> 
 </head>
@@ -58,8 +55,8 @@
                 </span>
 
                 <div class="text logo-text">
-                    <span class="name">Admin </span>
-                    <span class="profession">Super Admin</span>
+                    <span class="name">Administrator </span>
+                    <span class="profession">Admin Panel</span>
                 </div>
             </div>
 
@@ -72,28 +69,28 @@
 
                 <ul class="menu-links">
                     <li  class="nav-link">
-                        <a  href="index.php">
+                        <a  href="view_students.php">
                             <i  class='bx bx-menu icon' ><img style="width: 50%;" src="icons/profile.png"></i>
                             <span  class="text nav-text">Student List</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a  href="Instructors.php">
+                        <a  href="view_Instructors.php">
                             <i class='bx bx-bell icon'><img style="width: 50%;" src="icons/instructor.png"></i>
                             <span class="text nav-text">Instructor List</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a style="background-color: #00bbff;"  href="AddStu.php">
+                        <a style="background-color: #00bbff;"  href="Add_student.php">
                             <i class='bx bx-pie-chart-alt icon'><img style="width: 50%;" src="icons/addstudent.png"></i>
                             <span class="text nav-text">Add Students</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="AddIns.php">
+                        <a href="Add_Instructor.php">
                             <i class='bx bx-heart icon' ><img style="width: 50%;" src="icons/addinstructor.png"></i>
                             <span class="text nav-text">Add Instructor</span>
                         </a>
@@ -104,7 +101,7 @@
 
             <div class="bottom-content">
                 <li class="">
-                    <a href="../Login/logout.php">
+                    <a href="logout.php">
                         <i class='bx bx-log-out icon' ><img style="width: 50%;" src="icons/logout.png"></i>
                         <span class="text nav-text">Logout</span>
                     </a>
@@ -134,9 +131,6 @@
         </div>
 
     </section>
-
-    
-
     </div>
 
     <script src="script.js"></script>

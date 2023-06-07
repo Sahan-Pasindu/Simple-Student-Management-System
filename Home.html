@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Login</title>
+    <link rel="stylesheet" href="style1.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title-text">
+        <div class="titleAdmin">Login</div>
+      </div>
+      <div class="form-container">
+        <div class="form-inner">
+          <form action="login.php" class="admin" method="post">
+            <div class="field">
+              <input
+                type="text"
+                placeholder="Admin Id"
+                name="adminId"
+                required
+              />
+            </div>
+            <div class="field">
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                required
+              />
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Login" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
