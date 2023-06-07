@@ -3,24 +3,24 @@
 ?>
 <?php
     include "connection.php";
-    $studentId="";
+    $instructorId="";
     $password="";
-    $grade="";
+    $subject="";
 
     $errormsg="";
     $suss ="";
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $studentId= $_POST["studentId"];
+        $instructorId= $_POST["instructorId"];
         $password= $_POST["password"];
-        $grade= $_POST["grade"];
+        $subject= $_POST["subject"];
 
         do{
-            if(empty($studentId)||empty($password)){
+            if(empty($instructorId)||empty($password)||empty($subject)){
                 $errormsg="all need";
                 break;
             }
-            $sql = "INSERT INTO `student_details`(`studentId`, `password`, `grade`) VALUES ('$studentId','$password','$grade')";
+            $sql = "INSERT INTO `instructor_details`(`instructorId`, `password`, `subject`) VALUES ('$instructorId','$password','$subject')";
             $result = $con->query($sql);
 
             if(!$result){
@@ -30,10 +30,10 @@
 
             $studentId="";
             $password="";
-            $grade="";
+            $subject="";
 
             $suss="added correctly";
-            header("location: view_students.php");
+            header("location: view_Instructors.php");
 
         }while(false);
     }
@@ -44,10 +44,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <link rel="stylesheet" href="style.css">
     
-    <title>Add Students</title> 
+    <title>Add Instructors</title> 
 </head>
 <body>
     <nav class="sidebar close">
@@ -86,14 +86,14 @@
                     </li>
 
                     <li class="nav-link">
-                        <a style="background-color: #00bbff;"  href="Add_student.php">
+                        <a   href="Add_student.php">
                             <i class='bx bx-pie-chart-alt icon'><img style="width: 50%;" src="icons/addstudent.png"></i>
                             <span class="text nav-text">Add Students</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a href="Add_Instructor.php">
+                        <a style="background-color: #00bbff;" href="Add_Instructor.html">
                             <i class='bx bx-heart icon' ><img style="width: 50%;" src="icons/addinstructor.png"></i>
                             <span class="text nav-text">Add Instructor</span>
                         </a>
@@ -115,27 +115,24 @@
     </nav>
 
     <section class="home">
-        <div class="text">Add Students</div>
+        <div class="text">Add Instructors</div>
         <div style="padding: 2%; padding-bottom: 0%;">
             <form action="" method="post">
-                <label for="fname">Enter Student Id</label>
-                <input type="text" id="fname" name="studentId" value="<?php echo $studentId ?>" placeholder="">
+                <label for="fname">Enter instructor Id</label>
+                <input type="text" id="instructorId" name="instructorId" placeholder="" value="<?php echo $instructorId ?>">
             
                 <label for="lname">Enter Password</label>
-                <input type="text" id="lname" name="password" value="<?php echo $password ?>" placeholder="">
+                <input type="text" id="password" name="password" placeholder="" value="<?php echo $password ?>">
 
-                <label for="sub">Select Grade</label>
-                <select name="grade" id="grade">
+                <label for="sub">Select Instructor Subject</label>
+                <select name="subject" id="subject">
                     <option value="none" selected disabled hidden> </option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
+                    <option value="Mathematics">Mathematics</option>
+                    <option value="Science">Science</option>
+                    <option value="English">English</option>
                 </select>
               
-                <input type="submit" value="Save the Student">
+                <input type="submit" value="Save the Instructor">
               </form>
         </div>
         <div style="padding: 2%; padding-top: 0px;">

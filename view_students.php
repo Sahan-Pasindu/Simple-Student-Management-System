@@ -92,6 +92,7 @@
               <th>ID</th>
               <th>Username</th>
               <th>Password</th>
+              <th>Grade</th>
               <th colspan="2">Action</th>
             </tr>
             <?php
@@ -110,6 +111,7 @@
                         <td>$row[SId]</td>
                         <td>$row[studentId]</td>
                         <td>$modifiedPass</td>
+                        <td>$row[grade]</td>
                         
                         <td>
                             <a href='update_student.php?SId=$row[SId]'><button>Update</button></a>

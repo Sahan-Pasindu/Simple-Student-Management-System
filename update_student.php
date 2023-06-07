@@ -1,42 +1,17 @@
 <?php
-    session_start();
-?>
-<?php
+    
     include "connection.php";
-    $studentId="";
-    $password="";
-    $grade="";
 
-    $errormsg="";
-    $suss ="";
+    $SId = $_GET["SId"];
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $studentId= $_POST["studentId"];
-        $password= $_POST["password"];
-        $grade= $_POST["grade"];
-
-        do{
-            if(empty($studentId)||empty($password)){
-                $errormsg="all need";
-                break;
-            }
-            $sql = "INSERT INTO `student_details`(`studentId`, `password`, `grade`) VALUES ('$studentId','$password','$grade')";
-            $result = $con->query($sql);
-
-            if(!$result){
-                $errormsg = "Invalid Query";
-                break;
-            }
-
-            $studentId="";
-            $password="";
-            $grade="";
-
-            $suss="added correctly";
-            header("location: view_students.php");
-
-        }while(false);
+    $sql = "select * from student_details where SId=$SId";
+    $result = $con->query($sql);
+    if($row=$result->fetch_assoc()){
+        $studentId = $row['studentId'];
+        $password = $row['password'];
+        $grade = $row['grade'];
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +47,7 @@
 
                 <ul class="menu-links">
                     <li  class="nav-link">
-                        <a  href="view_students.php">
+                        <a style="background-color: #00bbff;" href="view_students.php">
                             <i  class='bx bx-menu icon' ><img style="width: 50%;" src="icons/profile.png"></i>
                             <span  class="text nav-text">Student List</span>
                         </a>
@@ -86,7 +61,7 @@
                     </li>
 
                     <li class="nav-link">
-                        <a style="background-color: #00bbff;"  href="Add_student.php">
+                        <a href="Add_student.php">
                             <i class='bx bx-pie-chart-alt icon'><img style="width: 50%;" src="icons/addstudent.png"></i>
                             <span class="text nav-text">Add Students</span>
                         </a>
@@ -115,33 +90,24 @@
     </nav>
 
     <section class="home">
-        <div class="text">Add Students</div>
+        <div class="text">Update Student</div>
         <div style="padding: 2%; padding-bottom: 0%;">
-            <form action="" method="post">
-                <label for="fname">Enter Student Id</label>
-                <input type="text" id="fname" name="studentId" value="<?php echo $studentId ?>" placeholder="">
-            
-                <label for="lname">Enter Password</label>
-                <input type="text" id="lname" name="password" value="<?php echo $password ?>" placeholder="">
+            <form action="stu_update.php" method="post">
+                <input type="hidden" id="SId" name="SId" value="<?php echo $SId; ?>">
 
-                <label for="sub">Select Grade</label>
-                <select name="grade" id="grade">
-                    <option value="none" selected disabled hidden> </option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                </select>
+                <label for="fname">Student Id</label>
+                <input type="text" id="studentId" name="studentId" value="<?php echo $studentId; ?>" placeholder="">
+            
+                <label for="lname">Password</label>
+                <input type="text" id="password" name="password" value="<?php echo $password; ?>" placeholder="">
+
+                <label for="sub">Grade</label>
+                <input type="number" id="grade" name="grade" value="<?php echo $grade; ?>" placeholder="">
               
-                <input type="submit" value="Save the Student">
+                <input name="UpdateStudentDetails" type="submit" value="Update Student">
               </form>
         </div>
         <div style="padding: 2%; padding-top: 0px;">
-        </div>
-        <div>
-            
         </div>
 
     </section>
