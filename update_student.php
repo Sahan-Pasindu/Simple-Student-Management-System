@@ -22,7 +22,7 @@
 
     <link rel="stylesheet" href="style.css">
     
-    <title>Add Students</title> 
+    <title>Update Students</title> 
 </head>
 <body>
     <nav class="sidebar close">
@@ -97,9 +97,6 @@
 
                 <label for="fname">Student Id</label>
                 <input type="text" id="studentId" name="studentId" value="<?php echo $studentId; ?>" placeholder="">
-            
-                <label for="lname">Password</label>
-                <input type="text" id="password" name="password" value="<?php echo $password; ?>" placeholder="">
 
                 <label for="sub">Grade</label>
                 <input type="number" id="grade" name="grade" value="<?php echo $grade; ?>" placeholder="">

@@ -1,42 +1,17 @@
 <?php
-    session_start();
-?>
-<?php
+    
     include "connection.php";
-    $instructorId="";
-    $password="";
-    $subject="";
 
-    $errormsg="";
-    $suss ="";
+    $InsId = $_GET["InsId"];
 
-    if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        $instructorId= $_POST["instructorId"];
-        $password= $_POST["password"];
-        $subject= $_POST["subject"];
-
-        do{
-            if(empty($instructorId)||empty($password)||empty($subject)){
-                $errormsg="all need";
-                break;
-            }
-            $sql = "INSERT INTO `instructor_details`(`instructorId`, `password`, `subject`) VALUES ('$instructorId','$password','$subject')";
-            $result = $con->query($sql);
-
-            if(!$result){
-                $errormsg = "Invalid Query";
-                break;
-            }
-
-            $studentId="";
-            $password="";
-            $subject="";
-
-            $suss="added correctly";
-            header("location: view_Instructors.php");
-
-        }while(false);
+    $sql = "select * from instructor_details where InsId=$InsId";
+    $result = $con->query($sql);
+    if($row=$result->fetch_assoc()){
+        $instructorId = $row['instructorId'];
+        $password = $row['password'];
+        $subject = $row['subject'];
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,10 +19,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="style.css">
     
-    <title>Add Instructors</title> 
+    <title>Update Students</title> 
 </head>
 <body>
     <nav class="sidebar close">
@@ -72,7 +47,7 @@
 
                 <ul class="menu-links">
                     <li  class="nav-link">
-                        <a  href="view_students.php">
+                        <a style="background-color: #00bbff;" href="view_students.php">
                             <i  class='bx bx-menu icon' ><img style="width: 50%;" src="icons/profile.png"></i>
                             <span  class="text nav-text">Student List</span>
                         </a>
@@ -86,14 +61,14 @@
                     </li>
 
                     <li class="nav-link">
-                        <a   href="Add_student.php">
+                        <a href="Add_student.php">
                             <i class='bx bx-pie-chart-alt icon'><img style="width: 50%;" src="icons/addstudent.png"></i>
                             <span class="text nav-text">Add Students</span>
                         </a>
                     </li>
 
                     <li class="nav-link">
-                        <a style="background-color: #00bbff;" href="Add_Instructor.html">
+                        <a href="Add_Instructor.php">
                             <i class='bx bx-heart icon' ><img style="width: 50%;" src="icons/addinstructor.png"></i>
                             <span class="text nav-text">Add Instructor</span>
                         </a>
@@ -115,30 +90,21 @@
     </nav>
 
     <section class="home">
-        <div class="text">Add Instructors</div>
+        <div class="text">Update Instructor</div>
         <div style="padding: 2%; padding-bottom: 0%;">
-            <form action="" method="post">
-                <label for="fname">Enter instructor Id</label>
-                <input type="text" id="instructorId" name="instructorId" placeholder="" value="<?php echo $instructorId ?>">
-            
-                <label for="lname">Enter Password</label>
-                <input type="text" id="password" name="password" placeholder="" value="<?php echo $password ?>">
+            <form action="Ins_update.php" method="post">
+                <input type="hidden" id="InsId" name="InsId" value="<?php echo $InsId; ?>">
 
-                <label for="sub">Select Instructor Subject</label>
-                <select name="subject" id="subject">
-                    <option value="none" selected disabled hidden> </option>
-                    <option value="Mathematics">Mathematics</option>
-                    <option value="Science">Science</option>
-                    <option value="English">English</option>
-                </select>
+                <label for="fname">Student Id</label>
+                <input type="text" id="instructorId" name="instructorId" value="<?php echo $instructorId; ?>" placeholder="">
+
+                <label for="sub">Grade</label>
+                <input type="text" id="subject" name="subject" value="<?php echo $subject; ?>" placeholder="">
               
-                <input type="submit" value="Save the Instructor">
+                <input name="UpdateInsDetails" type="submit" value="Update Instructor">
               </form>
         </div>
         <div style="padding: 2%; padding-top: 0px;">
-        </div>
-        <div>
-            
         </div>
 
     </section>
